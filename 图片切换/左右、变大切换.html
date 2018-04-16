@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左右变大切换</title>
+<meta name="description" content=''>
+<meta name="keywords" content=''>
+<link rel="stylesheet" type="text/css" href="http://www.zhaosuliao.com/resources/fore/css/common.css">
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body{padding: 0; margin: 0;}
+html{ width: 1200px; }
+
+.content{float: left; position: relative; overflow: hidden; width: 1080px; height: 650px;}
+.content ul{ position: absolute; top: 0; height: 650px; }
+.content .prev{ position: absolute; top: 200px; left: 0; width: 50px; height: 50px; background: rgba(0,0,0,0.6); }
+.content .next{ position: absolute; top: 200px; right: 0; width: 50px; height: 50px; background: rgba(0,0,0,0.6); }
+.content li{ margin: 50px 10px 0; float: left; width: 310px; height: 590px; background: #eee; font-size: 60px; text-align: center; line-height: 590px; }
+.content li.on{ margin-top: 0; width: 340px; height: 650px; }
+
+</style>
+</head>
+<body>
+<div class="content">
+    <ul style="margin-left: -465px;">
+        <li>1</li>
+        <li>2</li>
+        <li class="on">3</li>
+        <li class="on">4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+    <a href="javascript:;" class="prev">qian</a>
+    <a href="javascript:;" class="next">hou</a>
+</div>
+</body>
+<script type="text/javascript">
+
+
+$(function(){
+    var ul = $(".content ul"),
+        li = $(".content ul li"),
+        prev = $(".content .prev"),
+        next = $(".content .next"),
+        len = li.length,
+        w = $(".content ul li").outerWidth(true);
+
+    
+        
+    ul.width(w*len+200);
+    
+    var animate=[
+        {"margin-top":"0",width:340, height:650},
+        {"margin-top":"30px",width:310, height:590}
+    ]
+
+    clickbtn=false;
+
+    prev.click(function() {
+        if(clickbtn==false){
+            var ml=parseInt(ul.css("margin-left"));
+            var index = ul.find("li.on").index();
+
+            if(index==1){
+                $(this).hide();
+            };
+            if(index<len-1){
+               next.show();
+            };
+
+        
+            clickbtn=true; 
+            li.eq(index-1).animate(animate[0],500).addClass("on");
+            li.eq(index+1).animate(animate[1],500).removeClass("on");
+
+            ul.animate({
+                "margin-left":ml+w
+            },500)
+        }
+        setTimeout(function(){
+            clickbtn=false; 
+        }, 500);
+    });
+    next.click(function() {
+        if(clickbtn==false){
+            var ml=parseInt(ul.css("margin-left"));
+            var index = ul.find("li.on").index();
+
+            if(index>=0){
+                prev.show();
+            };
+            if(index==len-3){
+                $(this).hide();
+            };
+            clickbtn=true; 
+            li.eq(index+2).animate(animate[0],500).addClass("on");
+            li.eq(index).animate(animate[1],500).removeClass("on");
+
+            ul.animate({
+                "margin-left":ml-w
+            },500)
+        }
+        setTimeout(function(){
+            clickbtn=false; 
+        }, 500);
+
+    });  
+});
+</script>
+
+

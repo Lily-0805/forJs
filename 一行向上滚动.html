@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>一行向上滚动</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+.d{float: left; position: relative; overflow: hidden; width: 400px; height: 30px; background: #000;}
+.list2{ margin: 0; padding: 0; position: absolute; left: 0; width: 400px;}
+.list2 li{ margin: 0; padding: 0; float: left; width: 400px;}
+.list2 p{ float: left; margin: 0; padding: 0; width: 200px; text-align: center; line-height: 30px; color: #fff;}
+.list{ margin: 0; padding: 0; position: absolute; left: 0; width: 400px;}
+.list li{ float: left; margin: 0; padding: 0; width: 200px; text-align: center; line-height: 30px; color: #fff; list-style: none;}
+</style>
+</head>      
+<body>
+<div class="d">
+    <ul class="list2">
+        <li>
+            <p>向上滚动第1行-1</p>
+            <p>向上滚动第1行-2</p>
+        </li>
+        <li>
+            <p>向上滚动第2行-1</p>
+            <p>向上滚动第2行-2</p>
+        </li>
+    </ul>
+</div>
+
+<div class="d">
+    <ul class="list">
+        <li>向上滚动第1行-1</li>
+        <li>向上滚动第1行-2</li>
+        <li>向上滚动第2行-1</li>
+        <li>向上滚动第2行-2</li>
+        <li>向上滚动第3行-1</li>
+    </ul>
+</div>
+</body>
+</html> 
+
+<script type="text/javascript">
+function scroll(){
+    var $this = $(".list");
+    var oLi=$this.children("li").eq(0).clone(true);
+    var oLi1=$this.children("li").eq(1).clone(true);
+    $this.append(oLi);
+    oLi.after(oLi1);
+    var oneHeight = $this.children("li").eq(0).height();
+    var len = Math.round(($this.children("li").length)/2);
+    if(len!=($this.children("li").length)/2){
+        var oLi2=$this.children("li").eq(2).clone(true);
+        oLi1.after(oLi2);
+    }
+    $this.css("height",oneHeight*len);
+    var iNum=0;
+    setInterval(function(){
+        iNum++;
+        if(iNum>len-1){
+            $this.css("top",0);
+            iNum=1;
+        }
+        $this.animate({
+            "top":-iNum*oneHeight
+        },400);
+    },3000);
+}scroll();
+
+
+// 向上滚动
+$.fn.scroll=function(){
+    var $this=$(this);
+    var oLi=$this.children("li").eq(0).clone(true);
+    $this.append(oLi);
+    var oneHeight=$this.children("li").eq(0).height();
+    var len=$this.children("li").length;
+    $this.css("height",oneHeight*len);
+    var iNum=0;
+    var times=null;
+    autoPlay();
+    
+    function autoPlay(){        
+        times=setInterval(function(){
+            iNum++;
+            if(iNum>len-1){
+                $this.css("top",0);
+                iNum=1;
+            }
+            $this.animate({"top":-iNum*oneHeight},400);
+        },3000);
+    };
+
+    $this.mouseover(function(){
+        clearInterval(times);
+    }).mouseout(function(){
+        autoPlay();
+    });
+};
+
+// 向上滚动调用
+
+$(".list2").scroll();
+</script> 

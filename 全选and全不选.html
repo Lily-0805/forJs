@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>全选and全不选</title>
+    <script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+    <h3>ONE</h3>
+    <table class="tb">
+        <tr>
+            <td><input type="checkbox" class="cb" /></td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb" /></td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb" /></td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb" /></td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb" /></td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb" /></td>
+            <td>6</td>
+        </tr>
+    </table>
+    <p><button class="qx">全选</button><button class="qbx">全不选</button><button class="fx">反选</button></p>
+    <h3>TWO</h3>
+    <table class="tb01">
+        <tr>
+            <td><input type="checkbox" class="cb01" /></td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb01" /></td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb01" /></td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb01" /></td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb01" /></td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="cb01" /></td>
+            <td>6</td>
+        </tr>
+    </table>
+    <p><input type="checkbox" class="qx01" />全选</p>
+</body>
+</html>
+<script type="text/javascript">
+// ONE //
+$(function() {
+    //全选
+    $(".qx").click(function() {
+        $(".cb").each(function() {
+            $(this).prop("checked", true);
+        });
+    });
+    //全不选
+    $(".qbx").click(function() {
+        $(".cb").each(function() {
+            $(this).prop("checked", false);
+        });
+    });
+    //反选
+    $(".fx").click(function() {
+        $(".cb").each(function() {
+            $(this).prop("checked", !$(this).prop("checked"));
+        });
+    });
+});
+//  TWO //
+$(function() {
+    //全选and全不选
+    $(".qx01").click(function() {
+        if (this.checked) {
+            $(".cb01").prop("checked", true);
+        } else {
+            $(".cb01").prop("checked", false);
+        }
+    });
+    $(".cb01").click(function() {
+        allchk();
+    });
+    //判断全选复选框是否选中
+    function allchk() {
+        var chknum = $(".cb01").size(); //选项总个数
+        var chk = 0;
+        $(".cb01").each(function() {
+            if ($(this).prop("checked") == true) {
+                chk++;
+            }
+        });
+        if (chknum == chk) { //全选
+            $(".qx01").prop("checked", true);
+        } else { //不全选
+            $(".qx01").prop("checked", false);
+        }
+    };
+});
+</script>

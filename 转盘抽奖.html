@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>转盘抽奖</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+.content{ float: left; width: 930px; height: 630px;}
+.block{ float: left; margin: 5px; width: 300px; height: 200px; background: #1896DB; text-align: center; line-height: 200px; font-size: 50px;}
+.block.on{ background: #FD8400;}
+.try{ display: inline-block; width: 200px; height: 50px; color: #000; line-height: 50px;}
+.try_no{ display: none; width: 200px; height: 50px; color: #000; line-height: 50px;}
+
+</style>
+<script type="text/javascript">
+$(function() {
+    //抽奖代码
+    function cj() {
+        var times = null;
+        var index = 0;
+        var num = 0;//转的圈数
+        var position = 3; //停留位置
+        var ring = 0;
+        var speed = 600;
+
+        $(".try").click(function() {
+            //抽奖设置为按钮不可用
+            $(".try").hide();
+            $(".try_no").show();
+
+            num = Math.ceil(Math.random() * 4 + 4);//转的圈数
+            position = 0; //停留位置                                  
+            ring = 0;
+            clearInterval(times);
+            times = setInterval(zp, speed);
+        });
+
+        function zp() {
+            index++;
+            if (ring == 0) {
+                speed -= 66;
+                clearInterval(times);
+                times = setInterval(zp, speed);
+            };
+            if (ring == num - 1) {
+                speed += 66;
+                clearInterval(times);
+                times = setInterval(zp, speed);
+            };
+            for (var i = 1; i < 9; i++) {
+                $("#block" + i).removeClass('on');
+            }
+            $("#block" + index).addClass("on");
+            if (index % 8 == 0) {
+                index = 0;
+                ring++;
+            };
+            if (ring == num && index % 8 == position) {
+                index=0;
+                var str = '';
+                clearInterval(times);
+                if (position == 1) {
+                    str = '8福豆';
+                } else if (position == 2) {
+                    str = 'iPhone6';
+                } else if (position == 3) {
+                    str = '30元话费';
+                } else if (position == 4) {
+                    str = '红辣椒任性版';
+                } else if (position == 5) {
+                    str = '28福豆';
+                } else if (position == 6) {
+                    str = '红米2A';
+                } else if (position == 7) {
+                    str = '50元话费';
+                } else if (position == 0) {
+                    str = '荣耀畅玩4X';
+                }
+                //抽奖完成后，弹出
+                alert("恭喜你抽中" + str)
+                //抽奖设置为按钮可用
+                $(".try").show();
+                $(".try_no").hide();
+            };
+        };
+    };
+    cj();
+});
+
+</script> 
+</head>      
+<body>
+<div class="content">
+    <div class="line_one">
+        <div id="block1" class="block"><div class="">8福豆</div></div>
+        <div id="block2" class="block"><div class="">iPhone6</div></div>
+        <div id="block3" class="block"><div class="">30元话费</div></div>
+    </div>
+    <div class="line_two">
+        <div id="block8" class="block"><div class="">荣耀畅玩4X</div></div>
+        <div class="block">
+            <p><button class="try">点击抽奖</button><button class="try_no">祝君好运</button></p>
+        </div>
+        <div id="block4" class="block"><div class="">红辣椒任性版</div></div>
+    </div>
+    <div class="line_three">
+        <div id="block7" class="block"><div class="">50元话费</div></div>
+        <div id="block6" class="block"><div class="">红米2A</div></div>
+        <div id="block5" class="block"><div class="">28福豆</div></div>
+    </div>
+</div>
+<div class="tip" style="display:none;">恭喜你抽中<span class="num"></span></div>
+</body>
+</html> 
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>图片切换-带圆点</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body,div,form,ul,li,ol,dl,dt,dd,p,h1,h2,h3,h4,h5,h6 {margin:0; padding:0; font-weight:normal; font-size:12px; font-family:'Microsoft YaHei','宋体';}
+table , tr ,td {margin:0;padding:0; border-collapse:collapse;color:#000;}
+em,i {font-style:normal;}
+img,input {border:0; }
+ul,li {list-style-type:none;vertical-align:middle;}
+a {text-decoration:none;color:#000;}
+a:hover {text-decoration:underline;}
+.fl { float:left; }
+.fr { float:right; }
+.clear {clear:both;}
+.clearfix:after{ content: "0"; display: block; height: 0; clear: both; visibility: hidden; }
+
+.img_div{ position: relative; overflow: hidden; width: 383px; height: 287px;}
+.img_div .img_list{ position: absolute; left: 0; top: 0; height: 287px;}
+.img_div .img_list li{float: left; width: 383px; height: 287px;}
+.img_div .dot{ position: absolute; bottom: 0; left: 0; width: 100%; height: 30px; background: rgba(0,0,0,0.5); text-align: center; line-height: 20px;}
+.img_div .dot a{ display: inline-block; width: 38px; height: 28px; border: 1px solid #ddd;}
+.img_div .dot a.on{ border: 1px solid #f00;}
+.img_div .dot img{ width: 38px; height: 28px;}
+</style>
+</head>      
+<body>
+    <div class="img_div">
+        <ul class="img_list">
+            <li><img src="1.jpg" /></li>
+            <li><img src="2.jpg" /></li>
+            <li><img src="3.jpg" /></li>
+        </ul>
+        <p class="dot">
+            <a href="javascript:void(0);" class="on"><img src="1.jpg" /></a>
+            <a href="javascript:void(0);"><img src="2.jpg" /></a>
+            <a href="javascript:void(0);"><img src="3.jpg" /></a>
+        </p>
+    </div>
+</body>
+</html> 
+
+<script type="text/javascript">
+$(function(){
+    var gallery={
+        i:0,
+        len:$(".img_list li").length,
+        timer:null,
+        change:function(index){
+            $(".img_list").find("li").eq(index).show().siblings().hide();
+            $(".dot").find("a").eq(index).addClass("on").siblings().removeClass("on");
+        },
+        start:function(){
+            gallery.timer=setInterval(function(){
+                gallery.i==gallery.len-1 ? gallery.i=0 : ++gallery.i
+                gallery.change(gallery.i);
+            },3000);
+        },
+        stop:function()
+        {
+            clearInterval(gallery.timer);
+        },
+        event:function()
+        {
+            $(".dot").find("a").on("mouseover",function()
+            {
+                gallery.change($(this).index());
+                gallery.stop();
+            }).on("mouseout",gallery.start);
+            $(".img_list").find("li").on("mouseover",gallery.stop).on("mouseout",gallery.start);
+        },
+        init:function()
+        {
+            gallery.change(0);
+            gallery.start();
+            gallery.event();
+        }
+    };
+    gallery.init();
+});
+</script>
+
+

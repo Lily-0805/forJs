@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>判断文本长度</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body,div,form,ul,li,ol,dl,dt,dd,p,h1,h2,h3,h4,h5,h6 {margin:0; padding:0; font-weight:normal; font-size:12px; font-family:'Microsoft YaHei','宋体';}
+table , tr ,td {margin:0;padding:0; border-collapse:collapse;color:#000;}
+em,i {font-style:normal;}
+img,input {border:0; }
+ul,li {list-style-type:none;vertical-align:middle;}
+a {text-decoration:none;color:#000;}
+a:hover {text-decoration:underline;}
+
+
+span{ float: left; margin:0 10px; font-size: 14px; color: #f00;}
+.text{ height: 30px; border-bottom: 1px solid #ddd; line-height: 30px; font-size: 16px;}
+.p{font-size: 20px; font-weight: bold;}
+</style>
+</head>      
+<body>
+<ul>
+    <li class="text">1234567890</li>
+    <li class="text">12345一二三四五abcde</li>
+    <li class="text">abcdeABCDE12345</li>
+    <li class="text">abcde</li>
+    <li class="text">ABCDEF</li>
+</ul>
+<p class="p">以上文字个数分别是（1个汉字=2）顺序是反的(ie7个数会+1)</p>
+</body>
+</html> 
+
+<script type="text/javascript">
+$(function() {
+    var jmz = {}
+    jmz.GetLength = function(str) {
+        var realLength = 0, len = str.length, charCode = -1;
+        for (var i = 0; i < len; i++) {
+            charCode = str.charCodeAt(i);
+            if (charCode >= 0 && charCode <= 128) realLength += 1;
+            else realLength += 2;
+        }
+        return realLength;
+    };
+    
+    $(".text").each(function(i){
+        var num = jmz.GetLength($(this).html());
+        $("<span>"+num+"</span>").insertAfter("p");
+        console.log(num);
+    });
+
+});
+
+
+</script> 

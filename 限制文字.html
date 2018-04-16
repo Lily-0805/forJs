@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>限制文字</title>
+<link rel="stylesheet" type="text/css" href="one.css">
+<link rel="stylesheet" type="text/css" href="http://www.zhaosuliao.com/resources/fore/css/index.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+.div{ float: left; margin-right: 10px; position: relative; width: 200px; height: 200px; border: 1px solid #ddd; background: #fff;}
+.ico{ position: absolute; top: 50%; left: 50%; display: block; width: 0; height: 0; background: #f00; border-radius: 50%;}
+</style>
+</head>
+<body style=" background:#f90; ">
+<ul class="list">
+    <li>中油华南挂牌销售，产品销售正常。今日拉丝/均聚注塑/管材/共聚上调100元/吨，纤维上调50元/吨。其中独山子S1003挂7200元/吨，四川L5E89挂7150元/吨。</li>
+    <li>尽管下游需求跟进缓慢，但是石化装置陆续停车检修，并且仍有涨价意向，供应面及成本面利好支撑市场成交价格仍有上涨空间。</li>
+    <li>主要产油国仍有冻结产量的可能性，以及昨日美联储决议后美元重挫，均推动油价上涨。周四国际油价继续上扬。WTI 4月原油期货收涨1.75美元，涨幅4.5%，报40.20美元/桶，创2015年12月3日以来收盘新高。布伦特5月原油期货收涨1.21美元，涨幅3.0%，报41.54美元/桶，也创12月4日以来最高收盘位。</li>
+    <li>继本周二股价惨遭腰斩后，昨日加拿大制药商Valeant股价又跌去11%以上。Valeant的最大对冲基金投资者Bill Ackman旗下基金Pershing Square周二浮亏已暴增10亿美元，标准普尔昨日将该基金的评级展望列为负面，警告可能降级。</li>
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+//限制文字
+$.fn.interceptText=function(interval){
+    var $this=$(this);
+    var content=$this.html();
+    if($this.length>0){
+        var content= content.replace(/\s/g,"");
+        if(content.length>interval){
+            content=content.substring(0,interval);
+            $(this).html(content+"... ");
+        };
+    };
+};
+$(function(){
+	$(".list").find("li").each(function(){
+        $(this).interceptText(70);
+    })
+})
+</script>

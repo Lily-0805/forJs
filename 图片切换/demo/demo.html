@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>天天进步</title>
+<meta name="description" content=''>
+<meta name="keywords" content=''>
+<style type="text/css">
+    .supplier-brand {
+  margin-left: 0;
+}
+.supplier-brand.list-inline{
+  display: inline-block;
+}
+.supplier-brand li {
+  position: relative;
+  float: left;
+  display: inline;
+  overflow: hidden;
+  padding-left: 0;
+  padding-right: 0;
+  cursor:pointer;
+}
+.supplier-brand li i {
+  position: absolute;
+  display: inline-block;
+  top: 80px;
+  left: 30px;
+  z-index: 1;
+}
+.supplier-brand li.active i{
+  top: 20px;
+  left: 50px;
+  opacity: .6;
+  transition: top .5s,left .5s;
+}
+.supplier-brand li>a>img {
+  -webkit-filter: blur(2px); /* Chrome, Opera */
+  -moz-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+.supplier-brand li.active img{
+  -webkit-filter: blur(0px); /* Chrome, Opera */
+  -moz-filter: blur(0px);
+  -ms-filter: blur(0px);
+  filter: blur(0px);
+}
+</style>
+</head>
+<body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="slidemenu.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+    slideMenu.build('supplier-brand', 355, 15, 15, 1);
+};
+</script>
+
+<ul id="supplier-brand" class="supplier-brand list-inline">
+    <li class="active" style="width: 355px;">
+      <a href="company/87" target="_blank" title="北京金隅砂浆有限公司">
+        <i><img src="http://www.teleyi.com/resources/images/index/supplier-logo-01.png"></i>
+        <img src="http://www.teleyi.com/resources/images/index/supplier-brand-01.png" alt="北京金隅砂浆有限公司">
+      </a>
+    </li>
+    <li style="width: 163px;">
+      <a href="/company/1" target="_blank" title="北京中铁建工物资有限公司">
+        <i><img src="http://www.teleyi.com/resources/images/index/supplier-logo-02.png"></i>
+        <img src="http://www.teleyi.com/resources/images/index/supplier-brand-02.png" alt="北京中铁建工物资有限公司">
+      </a>
+    </li>
+    <li style="width: 163px;">
+      <a href="/company/133" target="_blank" title="中冶建筑研究总院有限公司">
+        <i><img src="http://www.teleyi.com/resources/images/index/supplier-logo-03.png"></i>
+        <img src="http://www.teleyi.com/resources/images/index/supplier-brand-03.png" alt="中冶建筑研究总院有限公司">
+      </a>
+    </li>
+    <li style="width: 163px;">
+      <a href="/company/3323" target="_blank" title="南京重起起重设备有限公司">
+        <i><img src="http://www.teleyi.com/resources/images/index/supplier-logo-04.png"></i>
+        <img src="http://www.teleyi.com/resources/images/index/supplier-brand-04.png" alt="南京重起起重设备有限公司&quot;&quot;">
+      </a>
+    </li>
+    <li style="width: 163px;">
+      <a href="/company/115" target="_blank" title="北京九霖宏祥科技发展有限责任公司">
+        <i><img src="http://www.teleyi.com/resources/images/index/supplier-logo-05.png"></i>
+        <img src="http://www.teleyi.com/resources/images/index/supplier-brand-05.png" alt="北京九霖宏祥科技发展有限责任公司">
+      </a>
+    </li>
+    <li style="width: 163px;">
+      <a href="/company/107255" target="_blank" title="北京银河实星卫浴科技有限公司">
+        <i><img src="http://www.teleyi.com/resources/images/index/supplier-logo-06.png"></i>
+        <img src="http://www.teleyi.com/resources/images/index/supplier-brand-06.png" alt="北京银河实星卫浴科技有限公司">
+      </a>
+    </li>
+  </ul>
+
+
+</body>
+

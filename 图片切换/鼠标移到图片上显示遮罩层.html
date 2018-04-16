@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>鼠标移到图片上显示遮罩</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body,div,form,ul,li,ol,dl,dt,dd,p,h1,h2,h3,h4,h5,h6 {margin:0; padding:0; font-weight:normal; font-size:12px; font-family:'Microsoft YaHei','宋体';}
+table , tr ,td {margin:0;padding:0; border-collapse:collapse;color:#000;}
+em,i {font-style:normal;}
+img,input {border:0; }
+ul,li {list-style-type:none;vertical-align:middle;}
+a {text-decoration:none;color:#000;}
+a:hover {text-decoration:underline;}
+.fl { float:left; }
+.fr { float:right; }
+.clear {clear:both;}
+.clearfix:after{
+  content: "0"; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;  
+}
+.div{ float: left; overflow: hidden; position: relative; margin-right: 10px; width: 383px; height: 287px;}
+.div .mask{ position: absolute; left: 0; top: 287px; width: 383px; height: 287px; background: rgba(0,0,0,0.7); text-align: center; line-height: 287px; font-size: 28px; color: #fff;}
+
+</style>
+</head>      
+<body>
+<div class="div">
+    <img src="1.jpg" width="383" height="287" />
+    <div class="mask">第一张图</div>
+</div>
+<div class="div">
+    <img src="2.jpg" width="383" height="287" />
+    <div class="mask">第二张图</div>
+</div>
+
+</body>
+</html> 
+
+<script type="text/javascript">
+$(function(){
+    $(".div").each(function(){
+        $(this).mouseenter(function(){
+            $(this).find(".mask").animate({
+                "top":0
+            });
+            return false;
+        });
+        $(this).mouseleave(function(){
+            $(this).find(".mask").animate({
+                "top":"287px"
+            });
+            return false;
+        });
+    })
+})
+
+
+</script> 

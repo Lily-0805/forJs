@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>一行向左滚动</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+.d{float: left; position: relative; overflow: hidden; width: 400px; height: 30px; background: #000;}
+.list{position: absolute;}
+.list p{ float: left; margin: 0; padding: 0 20px; text-align: center; line-height: 30px; color: #fff;}
+
+
+.pad_right{ padding-right:2em;}
+#scroll_div {height:26px;overflow: hidden;white-space: nowrap;width:535px;margin-left:10px;}
+#scroll_begin,#scroll_end {display: inline;}
+#scroll_begin a,#scroll_end a{ padding: 0 20px; }
+
+</style>
+</head>      
+<body>
+
+<div class="d">
+    <div class="list">
+        <p>向左滚动第1条向左滚动第1条</p>
+        <p>向左滚动第2条</p>
+        <p>向左滚动第3条</p>
+    </div>
+</div>
+
+<div id="scroll_div" class="fl"> 
+  <div id="scroll_begin">
+   <a href="">恭喜793765***获得 </a>
+   <a href="">恭喜793765dfgsfgstgsr***获得 </a>
+   <a href="">恭喜793765***获得gsrfgsregserg </a>
+   <a href="">恭喜793765***获得hstrhdyh54 </a>
+   <a href="">恭喜793765***获得gsfgs </a>
+  </div> 
+  <div id="scroll_end"></div>
+ </div> 
+
+</body>
+</html> 
+
+<script type="text/javascript">
+//文字横向滚动
+function ScrollImgLeft(){ 
+    var speed=50;
+    var MyMar = null;
+    var scroll_begin = document.getElementById("scroll_begin"); 
+    var scroll_end = document.getElementById("scroll_end"); 
+    var scroll_div = document.getElementById("scroll_div"); 
+    scroll_end.innerHTML=scroll_begin.innerHTML; 
+    function Marquee(){ 
+        if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0) 
+            scroll_div.scrollLeft-=scroll_begin.offsetWidth; 
+        else
+            scroll_div.scrollLeft++; 
+    } 
+    MyMar=setInterval(Marquee,speed); 
+    scroll_div.onmouseover = function(){
+　　　　　clearInterval(MyMar);
+　　}
+    scroll_div.onmouseout = function(){
+        MyMar = setInterval(Marquee,speed); 　　　　
+    }
+}ScrollImgLeft();
+
+
+$(function() {
+    //向左滚动
+    var leftScroll = {
+        i: 0,
+        w: $(".list p").eq(0).innerWidth(),
+        num: $(".list p").length,
+        timer: null,
+        btn: false,
+        html: null,
+        init: function() {
+            leftScroll.num = $(".list p").length;
+            leftScroll.w = $(".list p").eq(0).innerWidth();
+            if (leftScroll.num > 2) {//2是父元素可以显示几条滚动元素的条数
+                leftScroll.start();
+                leftScroll.ev();
+                leftScroll.btn = true;
+            }
+        },
+        start: function() {
+            $(".list").width($(".list p").eq(0).innerWidth() * $(".list p").length);
+            clearInterval(leftScroll.timer);
+            leftScroll.timer = setInterval(function() {
+                leftScroll.i--
+                    $(".list").css('left', leftScroll.i);
+                if (leftScroll.i < -(leftScroll.w)) {
+                    leftScroll.html = $(".list p").eq(0).clone(true);
+                    $(".list p").eq(0).remove();
+                    $(".list").append(leftScroll.html);
+                    leftScroll.i = 0;
+                }
+            }, 30);
+        },
+        stop: function() {
+            clearInterval(leftScroll.timer);
+        },
+        ev: function() {
+            $(".list").mouseover(function() {
+                leftScroll.stop();
+            }).mouseout(function() {
+                if (leftScroll.btn) {
+                    leftScroll.start();
+                }
+            })
+        }
+    };
+    leftScroll.init();
+});
+</script> 

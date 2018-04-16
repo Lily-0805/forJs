@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>倒计时（天时分秒）</title>
+<meta name="description" content=''>
+<meta name="keywords" content=''>
+<link rel="stylesheet" type="text/css" href="http://www.zhaosuliao.com/resources/fore/css/common.css">
+<script type="text/javascript" src="http://www.zhaosuliao.com/resources/fore/plugin/jquery.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+.d{ float: left; overflow-x: scroll; overflow-y: hidden; width: 100px; height: 100px; }
+.d .ddd{ float: left; width:  }
+.d .dd{ float: left; width: 20px;height: 100px; }
+
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+<input type="hidden" id="dddd" />
+
+<div id="times_wrap" class="time_num">
+    距离结束时间：
+    <div class="time_w">
+        <b id="times_d" class="time"> </b>天
+        <b id="times_h" class="time"> </b>时
+        <b id="times_m" class="time"> </b>分
+        <b id="times_s" class="time"> </b>秒
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+setTimeout("show_time()",1000);
+var time_wrap = $("#times_wrap");
+var time_d = $("#times_d");
+var time_h = $("#times_h");
+var time_m = $("#times_m");
+var time_s = $("#times_s");
+
+var time_end = new Date("2017/12/17 14:17:00");  // 设定结束时间
+time_end = time_end.getTime();
+
+function show_time(){
+    var time_now = new Date();  // 获取当前时间
+        time_now = time_now.getTime();
+    var time_distance = time_end - time_now;  // 结束时间减去当前时间
+    var int_day, int_hour, int_minute, int_second;
+    if(time_distance >= 0){
+        // 天时分秒换算
+        int_day = Math.floor(time_distance/86400000)
+        time_distance -= int_day * 86400000;
+        int_hour = Math.floor(time_distance/3600000)
+        time_distance -= int_hour * 3600000;
+        int_minute = Math.floor(time_distance/60000)
+        time_distance -= int_minute * 60000;
+        int_second = Math.floor(time_distance/1000)
+ 
+        // 时分秒为单数时、前面加零站位
+        if(int_hour < 10)
+        int_hour = "0" + int_hour;
+        if(int_minute < 10)
+        int_minute = "0" + int_minute;
+        if(int_second < 10)
+        int_second = "0" + int_second;
+        
+        // 显示时间
+        time_d.html(int_day);
+        time_h.html(int_hour);
+        time_m.html(int_minute);
+        time_s.html(int_second);
+        
+        setTimeout("show_time()",1000);
+    }else{
+        time_d.html(time_d.html());
+        time_h.html(time_h.html());
+        time_m.html(time_m.html());
+        time_s.html(time_s.html());
+ 
+        // clearTimeout(timerID)
+    }
+};
+</script>

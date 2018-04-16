@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>左侧导航栏处理</title>      
+<style type="text/css">
+ul, ol { list-style: none; }
+a{color: #fff;}
+.ul{ float: left; width: 150px; text-align: center;}
+.list{ float: left; margin: 10px 0; width: 150px; color: #fff; line-height: 30px;}
+.list a{ float: left; width: 150px; background: #3399EE; height: 30px;}
+.list a.on{ background: #FF7300;}
+.list ul{ float: left; width: 100px;}
+.list_a{ float: left; width: 100px; height: 20px; background: #FF7766; line-height: 20px;}
+.list_a.on1{ background:#11BB99; }
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+</head>      
+<body>
+<ul class="ul">
+    <li class="list">
+        <a href="javascript:void(0);">第一栏</a>
+        <ul style="display:none;">
+            <li class="list_a">1</li>
+            <li class="list_a">2</li>
+            <li class="list_a">3</li>
+        </ul>
+    </li>
+    <li class="list">
+        <a href="javascript:void(0);">第二栏</a>
+        <ul style="display:none;">
+            <li class="list_a">a</li>
+            <li class="list_a">b</li>
+            <li class="list_a">c</li>
+        </ul>
+    </li>
+    <li class="list">
+        <a href="javascript:void(0);">第三栏</a>
+        <ul style="display:none;">
+            <li class="list_a">A</li>
+            <li class="list_a">B</li>
+            <li class="list_a">C</li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html> 
+
+<script type="text/javascript">
+$(".list").click(function(){
+    $(this).find("a").addClass("on").next("ul").show()
+        .parent().siblings().children("a").removeClass("on")
+        .next("ul").hide().children("li").removeClass("on1");
+    return false;
+});
+$(".list_a").click(function(){
+    $(this).addClass("on1").siblings().removeClass("on1");
+    return false;
+})
+</script> 

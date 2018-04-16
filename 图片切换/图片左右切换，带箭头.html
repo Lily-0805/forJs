@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>图片左右切换，带箭头</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body,div,form,ul,li,ol,dl,dt,dd,p,h1,h2,h3,h4,h5,h6 {margin:0; padding:0; font-weight:normal; font-size:12px; font-family:'Microsoft YaHei','宋体';}
+table , tr ,td {margin:0;padding:0; border-collapse:collapse;color:#000;}
+em,i {font-style:normal;}
+img,input {border:0; }
+ul,li {list-style-type:none;vertical-align:middle;}
+a {text-decoration:none;color:#000;}
+a:hover {text-decoration:underline;}
+.fl { float:left; }
+.fr { float:right; }
+.clear {clear:both;}
+.clearfix:after{ content: "0"; display: block; height: 0; clear: both; visibility: hidden; }
+
+.div{ width:463px; height: 287px; }
+.img_div{ float: left; position: relative; overflow: hidden; width: 383px; height: 287px;}
+.img_div .img_list{ position: absolute; left: 0; top: 0; height: 287px;}
+.img_div .img_list li{float: left; width: 383px; height: 287px;}
+.prev,.next{ float: left; margin: 90px 10px 0 10px; width: 20px; height: 100px; background: rgba(0,0,0,0.6); text-align: center; color: #999; line-height: 100px;}
+</style>
+</head>      
+<body>
+<div class="div">
+    <a href="javascript:void(0);" class="prev">&lt;</a>
+    <div class="img_div">
+        <ul class="img_list" id="img_list01">
+            <li><img src="1.jpg" /></li>
+            <li><img src="2.jpg" /></li>
+            <li><img src="3.jpg" /></li>
+        </ul>
+    </div>
+    <a href="javascript:void(0);" class="next">&gt;</a>
+</div>
+</body>
+</html> 
+
+<script type="text/javascript">
+$(function(){   
+    $("#img_list01").focus();
+});
+$.fn.focus=function(){
+    var $this=$(this);
+    var w=$this.children("li").eq(0).width();
+    var oli=$this.children("li").eq(0).clone(true);
+    $this.append(oli);
+    var len=$this.children("li").length;
+    $this.css("width",len*w);
+    var iNow=0;
+    var times=null;
+    autoPlay();
+    var prev=$this.parents("div").prev("a");
+    var next=$this.parents("div").next("a");
+
+    function autoPlay(){
+        times=setInterval(function(){
+            iNow++;
+            move(iNow);
+        },5000);
+    };
+    function move(num){
+        console.log(num)
+        if(num>len-1){
+            $this.css("left",0);
+            num=1;
+            iNow=num;
+        }
+        if(num<0){
+            $this.css("left",-((len-1)*w));
+            num=len-1;
+            iNow=num;
+        }
+        $this.stop(true);
+        $this.animate({
+            "left":-(num*w)
+        },600);
+    };
+
+    $this.parents(".div").mouseover(function(){
+        clearInterval(times);
+    }).mouseout(function(){
+        autoPlay();
+    });
+
+    prev.click(function(){
+        iNow--;
+        move(iNow);
+    });
+    next.click(function(){
+        iNow++;
+        move(iNow);
+    });
+}
+</script>
+
+

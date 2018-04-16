@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/> 
+<title>红包摇起来</title>
+<link rel="stylesheet" type="text/css" href="common.css" />
+<style type="text/css">
+.ul{ margin: 50px; padding: 10px; height: 420px;}
+.ul li{overflow: hidden; float: left; margin: 30px; width: 300px; height: 400px; background: #EF093B; border-radius: 10px;}
+.ul li .top{ margin: -410px 0 0 -110px; width: 500px; height: 500px; border: 10px solid #F69B23; border-radius: 50%;}
+.ul li .btn{ margin: 100px 25px 0 25px; width: 250px; height: 50px; background: #FFDB16; border: none; border-radius: 5px; color: #8B3108; line-height: 50px; text-align: center; font-size: 24px; font-family: "MicroSoft YaHei"; outline: none; font-weight: bold;}
+.shake{animation:shake 0.2s infinite linear;}
+
+@keyframes shake{
+	0%{transform:rotate(2deg);}
+	50%{transform:rotateY(-2deg);}
+	100%{transform:rotate(2deg);}
+}
+@-webkit-keyframes shake{
+	0%{-webkit-transform:rotate(2deg);}
+	50%{-webkit-transform:rotateY(-2deg);}
+	100%{-webkit-transform:rotate(2deg);}
+}
+
+</style>
+<script type="text/javascript" src="jquery.js"></script>
+
+</head>      
+<body>
+<ul class="ul">
+	<li class="">
+		<div class="top"></div>
+		<button class="btn">点击拆红包</button>
+	</li>
+	<li class="">
+		<div class="top"></div>
+		<button class="btn">点击拆红包</button>
+	</li>
+	<li class="">
+		<div class="top"></div>
+		<button class="btn">点击拆红包</button>
+	</li>
+</ul>
+
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+	var $target = $(".ul li");
+	$target.each(function(){
+		var _$this = $(this)
+		_$this.find(".btn").click(function(){
+			_$this.addClass("shake");
+			setTimeout(function(){
+				_$this.removeClass("shake");
+			},2000);
+		});
+	});
+});
+
+</script> 
+

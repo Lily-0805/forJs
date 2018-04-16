@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>tab切换</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body,div,form,ul,li,ol,dl,dt,dd,p,h1,h2,h3,h4,h5,h6 {margin:0; padding:0; font-weight:normal; font-size:12px; font-family:'Microsoft YaHei','宋体';}
+table , tr ,td {margin:0;padding:0; border-collapse:collapse;color:#000;}
+em,i {font-style:normal;}
+img,input {border:0; }
+ul,li {list-style-type:none;vertical-align:middle;}
+a {text-decoration:none;color:#000;}
+a:hover {text-decoration:underline;}
+.fl { float:left; }
+.fr { float:right; }
+.clear {clear:both;}
+.clearfix:after{
+  content: "0"; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;  
+}
+.div{ position:relative; width: 300px; height: 300px;}
+#oimg{width: 100%; height: 100%;}
+#pt{position: absolute; left:0; top:0; visibility:hidden; width: 100%; height:100%; background:#fff;}
+#mask{ display:block; position: absolute; left:0; top:0; width: 100%; height:100%; background: rgba(0,0,0,0.5); text-align: center; line-height: 100%;}
+#start{margin-top: 50px; display: inline-block; width:111px; height:111px; background:#f00;}
+</style>
+</head>      
+<body>
+    <div class="div">
+        <img src="1.jpg" id="oimg"/>
+        <div id="pt"></div>
+        <div id="mask">
+            <a href="javascript:void(0)" id="start"></a>
+        </div>
+    </div>
+    <span id="time">30.000</span>''
+
+    <div id="pt_ok1"></div>
+    <div id="error"></div>
+</body>
+</html> 
+
+<script type="text/javascript">
+window.onload = function() {
+    var num = Math.ceil(Math.random() * 3);
+    var oImg = $("#oimg");
+        oImg.setAttribute('src', '');
+        oImg.setAttribute('src', num + '.jpg');
+    var oDiv = $("#pt");
+    var arr = [];
+    var arr2 = [];
+    var Index = 0;
+    var start = $('#start');
+    var startTime = 0;
+    var endTime = 0;
+    var times = null;
+    var time = $("#time");
+    var pt_ok1 = $("#pt_ok1");
+    var error = $("#error");
+    var load = $("#load");
+    var load_img = $("#load_img");
+
+    //再拼一次
+    $(".div_btn").on('touchstart', function() {
+        error.style.display = 'none';
+        pt_ok1.style.display = 'none';
+        mask.style.display = 'block';
+        num = Math.ceil(Math.random() * 3);
+        oImg = $("#oimg");
+        oImg.setAttribute('src', '');
+        oImg.setAttribute('src', num + '.jpg');
+        time.innerHTML = '30.000';
+    })
+
+
+    oImg.onload = function() {
+        //创建九宫格
+        function create() {
+            var w = oImg.width;
+            var h = oImg.height;
+            var w2 = w / 3;
+            var h2 = h / 3;
+
+            oDiv.innerHTML = '';
+            oDiv.style.width = w + 'px';
+            oDiv.style.height = h + 'px';
+            for (var i = 0; i < 9; i++) {
+                var lisDiv = document.createElement('div');
+                lisDiv.style.width = w / 3 - 2 + 'px';
+                lisDiv.style.height = h / 3 - 2 + 'px';
+                lisDiv.style.marginRight = '2px';
+                lisDiv.style.marginBottom = '3px';
+                lisDiv.style.float = 'left';
+                oDiv.appendChild(lisDiv);
+                if (i < 3) {
+                    arr2.push(i * w2);
+                    lisDiv.style.backgroundImage = 'url(' + num + '.jpg)';
+                    lisDiv.style.backgroundPosition = -(arr2[i]) + 'px 0';
+                    lisDiv.style.backgroundSize = w + "px " + h + "px";
+                    arr.push([lisDiv.offsetLeft, lisDiv.offsetTop]);
+                } else if (i < 6 && i >= 3) {
+                    lisDiv.style.backgroundImage = 'url(' + num + '.jpg)';
+                    lisDiv.style.backgroundPosition = -(arr2[i - 3]) + 'px ' + -(h2) + 'px';
+                    lisDiv.style.backgroundSize = w + "px " + h + "px";
+                    arr.push([lisDiv.offsetLeft, lisDiv.offsetTop]);
+                } else if (i < 9 && i >= 6) {
+                    lisDiv.style.backgroundImage = 'url(' + num + '.jpg)';
+                    lisDiv.style.backgroundPosition = -(arr2[i - 6]) + 'px ' + -(h2 * 2) + 'px';
+                    lisDiv.style.backgroundSize = w + "px " + h + "px";
+                    arr.push([lisDiv.offsetLeft, lisDiv.offsetTop]);
+                }
+            }
+        };
+        create();
+            //转换布局
+        var element = oDiv.getElementsByTagName('div');
+        for (var i = 0; i < 9; i++) {
+            element[i].style.position = 'absolute';
+            element[i].style.left = arr[i][0] + 'px';
+            element[i].style.top = arr[i][1] + 'px';
+        };
+
+        //start
+        start.addEventListener('touchstart', function() {
+            $("#mask").style.display = 'none';
+            oDiv.style.visibility = 'visible';
+
+            var randomArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
+            randomArr.sort(function(n1, n2) {
+                return Math.random() - 0.332578;
+            });
+            for (var i = 0; i < 9; i++) {
+                element[i].style.left = arr[randomArr[i]][0] + 'px';
+                element[i].style.top = arr[randomArr[i]][1] + 'px';
+                element[i].index = randomArr[i];
+            }
+
+            oDiv.style.display = 'block';
+            startTime = new Date().getTime() + 30;
+            clearInterval(times);
+            startTime2();
+        });
+
+        //托动
+        for (var i = 0; i < 9; i++) {
+            element[i].index = i;
+            drap(element[i]);
+        }
+        var zjIndex = -1;
+
+        function drap(obj) {
+            var disX = 0;
+            var disY = 0;
+            obj.addEventListener('touchstart', function(e) {
+                var touch = e.changedTouches[0];
+                Index++;
+                obj.style.zIndex = Index;
+                disX = touch.clientX - obj.offsetLeft;
+                disY = touch.clientY - obj.offsetTop;
+            });
+            obj.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                var touch = e.changedTouches[0];
+                obj.style.left = touch.clientX - disX + 'px';
+                obj.style.top = touch.clientY - disY + 'px';
+            });
+            obj.addEventListener('touchend', function() {
+                var zjDiv = zj(obj)
+                var temp = -1;
+                if (zjDiv) {
+                    zjDiv.style.left = arr[obj.index][0] + 'px';
+                    zjDiv.style.top = arr[obj.index][1] + 'px';
+                    obj.style.left = arr[zjDiv.index][0] + 'px';
+                    obj.style.top = arr[zjDiv.index][1] + 'px';
+                } else {
+                    obj.style.left = arr[obj.index][0] + 'px';
+                    obj.style.top = arr[obj.index][1] + 'px';
+                    return false;
+                }
+                temp = obj.index;
+                obj.index = zjDiv.index;
+                zjDiv.index = temp;
+
+                if (cg()) {
+                    load.style.display = 'block';
+                    load_img.style.display = "block";
+                    var time_game = (30.000 - (time.innerHTML)).toFixed(3);
+                    clearInterval(times);
+                    tc(pt_ok1);
+                    $(".wc_time").html(time_game);
+                }
+            });
+        };
+
+        //找最近
+        function zj(obj) {
+            var val = 99999;
+            var index = -1;
+            for (var i = 0; i < 9; i++) {
+                if (pz(obj, element[i]) && obj != element[i]) {
+                    var c = distance(obj, element[i]);
+                    if (c < val) {
+                        val = c;
+                        index = i
+                    }
+                }
+            }
+            if (index != -1) {
+                return element[index];
+            } else {
+                return false;
+            }
+        };
+
+        //碰撞
+        function pz(obj1, obj2) {
+            var L1 = obj1.offsetLeft;
+            var R1 = obj1.offsetLeft + obj1.offsetWidth;
+            var T1 = obj1.offsetTop;
+            var B1 = obj1.offsetTop + obj1.offsetHeight;
+
+            var L2 = obj2.offsetLeft;
+            var R2 = obj2.offsetLeft + obj2.offsetWidth;
+            var T2 = obj2.offsetTop;
+            var B2 = obj2.offsetTop + obj2.offsetHeight;
+
+            if (R1 < L2 || L1 > R2 || B1 < T2 || T1 > B2) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+        //距离
+        function distance(obj1, obj2) {
+            var a = obj1.offsetLeft - obj2.offsetLeft;
+            var b = obj1.offsetTop - obj2.offsetTop;
+            return Math.sqrt(a * a + b * b);
+        };
+
+        //判断拼图成功
+        function cg() {
+            for (var i = 0; i < 9; i++) {
+                var l = element[i].offsetLeft;
+                var t = element[i].offsetTop;
+                if (l != arr[i][0]) {
+                    return false;
+                }
+                if (t != arr[i][1]) {
+                    return false;
+                }
+            }
+            return true;
+        };
+
+        function startTime2() {
+            times = setInterval(function() {
+                var now = new Date().getTime();
+                var cha = now - startTime;
+                var m = cha / 1000;
+                if ((30.000 - m) <= 0) {
+                    clearInterval(times);
+                    //alert(11)
+                    tc(error);
+                    time.innerHTML = '0.000';
+                } else {
+                    time.innerHTML = (30.000 - m).toFixed(3);
+                }
+
+            }, 100)
+        };
+
+
+        function tc(obj) {
+            load_img.style.display = "none";
+            load.style.display = 'none';
+            oDiv.style.display = 'none';
+            error.style.display = 'none';
+            pt_ok1.style.display = 'none';
+            obj.style.display = 'block';
+        };
+
+    }
+}
+</script>
+
+

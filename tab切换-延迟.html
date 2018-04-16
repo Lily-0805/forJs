@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>天天进步</title>
+<meta name="description" content=''>
+<meta name="keywords" content=''>
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+.tab_title{ width: 400px; height: 30px; background: #ddd; text-align: center; }
+.tab_title ul{ float: left; margin: 0; padding: 0; width: 400px; }
+.tab_title li{ margin: 0; float: left; width: 100px; height: 30px; line-height: 30px; list-style: none; cursor: pointer; }
+.tab_title li.on{ background: #fff; }
+.content{ float: left; width: 400px; height: 300px; background: #efefef;text-align: center; line-height: 300px; font-size: 80px; }
+</style>
+</head>
+<body>
+<div class="tab_title">
+    <ul>
+        <li class="on">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
+<div class="content">
+    1
+</div>
+<div class="content" style="display: none;">
+    2
+</div>
+<div class="content" style="display: none;">
+    3
+</div>
+<div class="content" style="display: none;">
+    4
+</div>
+</body>
+<script type="text/javascript">
+
+
+//timer就是setTimeout的返回值，在清除计时器clearTimeout是需要用到的。是通过当前元素$(element).data("timer", timer)存储在元素的缓存里。需要清除计时器时取出$(element).data("timer")
+
+$(document)
+    .on("mouseenter",".tab_title li",function(){
+        var $this = $(this);
+        var idx = $this.index();
+        var timer = $(this).data("timer");
+
+        if(timer){
+            clearTimeout(timer);
+            timer = null;   
+        }
+        timer = setTimeout(function(){
+            $(".tab_title li").removeClass("on");
+            $this.addClass("on");
+            $(".content").hide();
+            $(".content").eq(idx).show();
+        }, 200);
+
+        $(this).data("timer",timer)
+
+
+    })
+    .on("mouseleave",".tab_title li",function(){
+        var timer = $(this).data("timer");
+        if(timer){
+            clearTimeout(timer);
+            timer = null;                
+        }
+        $(this).removeData("timer"); //用完要去掉
+        
+    })
+</script>
+
+

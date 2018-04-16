@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>tab自动切换</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body,div,form,ul,li,ol,dl,dt,dd,p,h1,h2,h3,h4,h5,h6 {margin:0; padding:0; font-weight:normal; font-size:12px; font-family:'Microsoft YaHei','宋体';}
+table , tr ,td {margin:0;padding:0; border-collapse:collapse;color:#000;}
+em,i {font-style:normal;}
+img,input {border:0; }
+ul,li {list-style-type:none;vertical-align:middle;}
+a {text-decoration:none;color:#000;}
+a:hover {text-decoration:underline;}
+.fl { float:left; }
+.fr { float:right; }
+.clear {clear:both;}
+.clearfix:after{
+  content: "0"; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;  
+}
+.div{ margin-bottom: 10px; width: 500px; height: 200px; background: #ddd; border: 1px solid #000;}
+.title{ float: left; width: 100%; height: 30px; background: #3399EE; color: #fff; line-height: 30px;}
+.title li,.title a{float: left; width: 100px; height: 30px; text-align: center;}
+.title li.on{ background: #ddd;}
+.content{ width: 100%; height: 170px;}
+
+</style>
+</head>      
+<body>
+<div id="one" class="div">
+    <ul class="title">
+        <li class="on"><a href="javascript:void(0);">1</a></li>
+        <li><a href="javascript:void(0);">2</a></li>
+        <li><a href="javascript:void(0);">3</a></li>
+    </ul>
+    <div class="content">11</div>
+    <div class="content" style="display:none;">22</div>
+    <div class="content" style="display:none;">33</div>
+</div>
+
+</body>
+</html> 
+
+<script type="text/javascript">
+$(function(){
+    var times=null;
+    var index=0;
+    function tab(index){
+        $(".title li").removeClass("on");
+        $(".title li").eq(index).addClass("on");
+        $(".content").hide();
+        $(".content").eq(index).show();
+    }
+    function time_satrt(){
+        times=setInterval(function(){
+            index++;
+            if(index>$(".title li").length-1){
+                index=0;
+            };
+            if(index<0){
+                index=$(".title li").length-1;
+            }
+            tab(index)
+
+        },4000);
+    }
+    time_satrt();
+    $("#one").mouseover(function(){
+        clearInterval(times);
+    }).mouseout(function(){
+        clearInterval(times);
+        time_satrt();
+    });
+    $(".title a").each(function(i){
+        $(this).mouseover(function(){
+            $(".title li").removeClass("on");
+            $(this).parent("li").addClass("on");
+            $(".content").hide();
+            $(".content").eq(i).show();
+            index=i;
+        });
+    });
+})
+
+
+</script> 

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>高亮关键词</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body,div,form,ul,li,ol,dl,dt,dd,p,h1,h2,h3,h4,h5,h6 {margin:0; padding:0; font-weight:normal; font-size:12px; font-family:'Microsoft YaHei','宋体';}
+table , tr ,td {margin:0;padding:0; border-collapse:collapse;color:#000;}
+em,i {font-style:normal;}
+img,input {border:0; }
+ul,li {list-style-type:none;vertical-align:middle;}
+a {text-decoration:none;color:#000;}
+a:hover {text-decoration:underline;}
+body{padding: 50px;}
+input{ width: 200px; height: 26px; border: 1px solid #ddd; border-radius: 5px;}
+span{ font-size: 30px; color: #f00;}
+.text{ height: 30px; border-bottom: 1px solid #ddd; line-height: 30px; font-size: 16px;}
+.p{font-size: 20px; font-weight: bold;}
+
+</style>
+</head>      
+<body>
+<input type="text" id="word" placeholder="请输入关键字" /><button class="btn">提交</button>
+<ul>
+    <li class="text">我A3HG6HJDY</li>
+    <li class="text">R530HHSRH6TKB</li>
+    <li class="text">21SPFGDFGD</li>
+    <li class="text">70G50HSLRHTRUH </li>
+    <li class="text">154FSAGFRGEV</li>
+</ul>
+</body>
+</html> 
+
+<script type="text/javascript">
+$(function() {
+    //高亮关键词
+    $(".btn").click(function(){
+        var word=$("#word").val();
+        var word_array=word.replace(/ {1,}/," ").split(" ");
+        var n=word_array.length;
+        for(var i=0;i<n;i++){
+            $(".text").each(function(){
+                var regexp=new RegExp(word_array[i],"gi");
+                var replace=$(this).html().replace(regexp,"<span>$&</span>");
+                $(this).html(replace);
+            });
+        };
+    });
+});
+
+
+</script> 

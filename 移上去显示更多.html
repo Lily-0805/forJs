@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>移上去显示更多，可盖住下面的内容</title>
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+.player{ overflow: hidden; float: left; margin: 0 10px; width:280px; margin-bottom: 40px; color: #000; }
+.player p{ font-size: 14px;}
+.photo{position: relative; float: left; padding: 10px; background: #ffffdf; width: 260px; height: 330px;}
+.photo .myphoto{ width: 260px; height: 330px;}
+.photo .mycode{position: absolute; top: 10px; left: 10px; width: 260px; height: 330px; background:rgba(0,0,0,0.7); color: #fff; z-index: 2;}
+.photo .mycode .text{ float: left; margin:0px 31px 0 32px; width: 197px; text-align: center; font-size: 18px; line-height: 50px;}
+.photo .mycode img{float: left; margin:57px 31px 0 32px;}
+.xx{ float: left; padding: 0 10px 10px 10px; background: #ffffdf; width: 260px;}
+.xx .p1{ overflow: hidden; width: 100%; height: 30px; white-space: nowrap; text-overflow:ellipsis;}
+.xx .p2{overflow: hidden; width: 260px; height: 40px; font-size: 14px; line-height: 20px;}
+.xx .p2 i{color: #e10f92;}
+.xx .myname{ float: right; color: #e10f92;}
+.xx .mynumber{display: inline-block; width: 85px; color: #1f178e;}
+.xx .myballot{ width: 110px;}
+.xx .myballot i{color: #ff2400;}
+.xx .myinfo{ float: right; width: 66px; height: 24px; background: #e10f92; border-radius: 5px; color: #ffff03; line-height: 24px; text-align: center;}
+.player-hover .photo, .player-hover .xx{background: #feff03;}
+.player-layer{position: absolute; padding-bottom: 10px; z-index: 100; background: #feff03; font-size: 14px;}
+.player-layer i{color: #e10f92;}
+</style>
+</head>
+<body>
+<div class="player">
+    <div class="photo">
+        <img src="http://www.zhaosuliao.com/resources/fore/image/activity/ml/list/126.jpg" width="260" height="330" />
+        <div class="mycode" style="display:none;">
+            <img src="http://hd.zhaosuliao.com/static/image/activity/mlzx2015/mlzx_ckxq.png" alt="" width="197" height="197"  />
+            <span class="text">微信扫码，立即投票</span>
+        </div>
+    </div>
+    <div class="xx">
+        <div class="p2 player-layer-target"><i>参选宣言：</i>时间改变了我们的样子，却在心里留下了彼此的影子。流年逝去里，我为谁记住，为谁流泪，为谁狂欢，为谁落寞……都一一定格在了那些若干年的沉淀里。一件东西，一封信笺，一声问候，一句想念，都可以勾起那时那年那段最美的记忆来，在思绪里泛滥成灾，然后再慢慢沉淀。</div>
+    </div>
+</div>
+<div class="player">
+    <div class="photo">
+        <img src="http://www.zhaosuliao.com/resources/fore/image/activity/ml/list/126.jpg" width="260" height="330" />
+        <div class="mycode" style="display:none;">
+            <img src="http://hd.zhaosuliao.com/static/image/activity/mlzx2015/mlzx_ckxq.png" alt="" width="197" height="197"  />
+            <span class="text">微信扫码，立即投票</span>
+        </div>
+    </div>
+    <div class="xx">
+        <div class="p2 player-layer-target"><i>参选宣言：</i>时间改变了我们的样子，却在心里留下了彼此的影子。流年逝去里，我为谁记住，为谁流泪，为谁狂欢，为谁落寞……都一一定格在了那些若干年的沉淀里。一件东西，一封信笺，一声问候，一句想念，都可以勾起那时那年那段最美的记忆来，在思绪里泛滥成灾，然后再慢慢沉淀。</div>
+    </div>
+</div>
+<div class="player">
+    <div class="photo">
+        <img src="http://www.zhaosuliao.com/resources/fore/image/activity/ml/list/126.jpg" width="260" height="330" />
+        <div class="mycode" style="display:none;">
+            <img src="http://hd.zhaosuliao.com/static/image/activity/mlzx2015/mlzx_ckxq.png" alt="" width="197" height="197"  />
+            <span class="text">微信扫码，立即投票</span>
+        </div>
+    </div>
+    <div class="xx">
+        <div class="p2 player-layer-target"><i>参选宣言：</i>时间改变了我们的样子，却在心里留下了彼此的影子。流年逝去里，我为谁记住，为谁流泪，为谁狂欢，为谁落寞……都一一定格在了那些若干年的沉淀里。一件东西，一封信笺，一声问候，一句想念，都可以勾起那时那年那段最美的记忆来，在思绪里泛滥成灾，然后再慢慢沉淀。</div>
+    </div>
+</div>
+<div class="player">
+    <div class="photo">
+        <img src="http://www.zhaosuliao.com/resources/fore/image/activity/ml/list/126.jpg" width="260" height="330" />
+        <div class="mycode" style="display:none;">
+            <img src="http://hd.zhaosuliao.com/static/image/activity/mlzx2015/mlzx_ckxq.png" alt="" width="197" height="197"  />
+            <span class="text">微信扫码，立即投票</span>
+        </div>
+    </div>
+    <div class="xx">
+        <div class="p2 player-layer-target"><i>参选宣言：</i>时间改变了我们的样子，却在心里留下了彼此的影子。流年逝去里，我为谁记住，为谁流泪，为谁狂欢，为谁落寞……都一一定格在了那些若干年的沉淀里。一件东西，一封信笺，一声问候，一句想念，都可以勾起那时那年那段最美的记忆来，在思绪里泛滥成灾，然后再慢慢沉淀。</div>
+    </div>
+</div>
+
+
+</body>
+<script type="text/javascript">
+$(function(){
+	var playerLayerTimer = null;
+
+	$(document)
+        .on('mouseenter','.player',function(){
+            var offset,
+                $target = $(this),
+                $playerLayer = $("#playerLayer"),
+                $playerLayerTarget = $target.find(".player-layer-target");
+
+            if(playerLayerTimer){
+                clearTimeout(playerLayerTimer);
+                playerLayerTimer = null;   
+            }
+            if(!$playerLayer.length){
+                $playerLayer = $("<div>", {
+                    "id": "playerLayer"
+                }).appendTo(document.body).addClass("player-layer");
+            } 
+            offset = $playerLayerTarget.offset();
+            $playerLayer.html($playerLayerTarget.html()).css({
+                padding: "0 10px 10px",
+                top: offset.top + "px",
+                width: $playerLayerTarget.width() + "px",
+                left: $target.offset().left + "px",
+                "line-height": $playerLayerTarget.css("line-height")
+            }).show().data("target", $target);  
+            $(this).addClass("player-hover");
+
+        })
+        .on('mouseleave.player','.player',function(){
+            var $this = $(this);
+
+            if(playerLayerTimer){
+                clearTimeout(playerLayerTimer);
+                playerLayerTimer = null;                
+            }
+            playerLayerTimer = setTimeout(function(){
+                $("#playerLayer").hide();  
+                $this = null; 
+            }, 1); 
+            $this.removeClass("player-hover");            
+        })
+        .on('mouseenter mouseleave','.photo',function(){
+            //选手二维码显示
+            $(this).find('.mycode').toggle();
+        })
+        .on("mouseenter", ".player-layer", function(){
+            if(playerLayerTimer){
+                clearTimeout(playerLayerTimer);
+                playerLayerTimer = null;                
+            }
+            $(this).data("target").addClass("player-hover");
+        })        
+        .on("mouseleave", ".player-layer", function(){
+            var $this = $(this);
+
+            if(playerLayerTimer){
+                clearTimeout(playerLayerTimer);
+                playerLayerTimer = null;
+            }
+            playerLayerTimer = setTimeout(function(){
+                $this.hide();  
+                $this = null; 
+            }, 1);
+            $this.data("target").removeClass("player-hover").removeData("target"); 
+        });
+});
+
+
+</script>
+	</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>多行向上滚动</title>      
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+.d{float: left; position: relative; overflow: hidden; width: 400px; height: 90px; background: #000;}
+.list,.list2{ margin: 0; padding: 0; position: absolute; left: 0; width: 400px;}
+.list li,.list2 li{ margin: 0; padding: 0; float: left; width: 200px; text-align: center; line-height: 30px; color: #fff;}
+</style>
+</head>      
+<body>
+
+<div class="d">
+    <ul class="list">
+        <li>向左滚动第1行-1</li>
+        <li>向左滚动第1行-2</li>
+        <li>向左滚动第2行-1</li>
+        <li>向左滚动第2行-2</li>
+        <li>向左滚动第3行-1</li>
+        <li>向左滚动第3行-2</li>
+    </ul>
+</div>
+<div class="d" style="background: #f00;">
+    <ul class="list2">
+        <li>向左滚动第1行-1</li>
+        <li>向左滚动第1行-2</li>
+        <li>向左滚动第2行-1</li>
+        <li>向左滚动第2行-2</li>
+        <li>向左滚动第3行-1</li>
+        <li>向左滚动第3行-2</li>
+        <li>向左滚动第4行-1</li>
+        <li>向左滚动第4行-2</li>
+    </ul>
+</div>
+</body>
+</html> 
+
+<script type="text/javascript">
+
+
+
+// 向上滚动
+$.fn.scrollcontent=function(interval){
+    var $this=$(this);
+    var box=$this.closest("div")
+    var m=box.height();
+    var n=$this.height();
+    if(n>=m){
+        $this.append($this.html());
+        var i=0;
+        var timer;
+        var start=function(){
+            timer=setInterval(function(){
+                box.scrollTop(i);
+                i===n ? i=0 : i++;
+            },interval);
+        }
+        var stop=function(){
+            clearInterval(timer);
+        }
+        start();
+        box.on("mouseover",stop).on("mouseout",start);
+    }
+};
+
+// 向上滚动调用
+$(".list").scrollcontent(100);
+$(".list2").scrollcontent(1000);
+
+</script> 

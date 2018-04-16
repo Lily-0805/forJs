@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>抽奖转盘</title>
+
+<style type="text/css">
+* { margin: 0; padding: 0;}
+body { font-family: "Microsoft Yahei"; background-color: #15734b;}
+h1 { width: 900px; margin: 40px auto; font: 32px "Microsoft Yahei"; text-align: center; color: #fff;}
+.rotary { margin: 100px; position: relative; float: left; width: 504px; height: 504px; background-image: url(images/g.png);}
+.hand { position: absolute; left: 144px; top: 144px; width: 216px; height: 216px; cursor: pointer;}
+</style>
+
+</head>
+
+<body>
+<div class="dowebok">
+	<div class="rotary">
+		<img class="hand" src="images/z.png" alt="">
+	</div>
+
+</div>
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.rotate.min.js"></script>
+<script>
+$(function(){
+	var $hand = $('.hand');
+
+	$hand.click(function(){
+		var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+		data = data[Math.floor(Math.random()*data.length)];
+		//var data = 12;//所中奖品
+		switch(data){
+			case 1:
+				rotateFunc(1,16,'恭喜你抽中了1个月绿钻');
+				break;
+			case 2:
+				rotateFunc(2,47,'恭喜你抽中了2个月绿钻');
+				break;
+			case 3:
+				rotateFunc(3,76,'恭喜你抽中了3个月绿钻');
+				break;
+			case 4:
+				rotateFunc(4,106,'恭喜你抽中了4个月绿钻');
+				break;
+			case 5:
+				rotateFunc(5,135,'恭喜你抽中了5个月绿钻');
+				break;
+			case 6:
+				rotateFunc(6,164,'恭喜你抽中了6个月绿钻');
+				break;
+			case 7:
+				rotateFunc(7,193,'恭喜你抽中了7个月绿钻');
+				break;
+			case 8:
+				rotateFunc(8,223,'恭喜你抽中了8个月绿钻');
+				break;
+			case 9:
+				rotateFunc(9,252,'恭喜你抽中了9个月绿钻');
+				break;
+			case 10:
+				rotateFunc(10,284,'恭喜你抽中了10个月绿钻');
+				break;
+			case 11:
+				rotateFunc(11,314,'恭喜你抽中了11个月绿钻');
+				break;
+			case 12:
+				rotateFunc(12,345,'恭喜你抽中了12个月绿钻');
+				break;
+		}
+	});
+
+	var rotateFunc = function(awards,angle,text){
+		$hand.stopRotate();
+		$hand.rotate({
+			angle: 0,
+			duration: 5000,//抽奖所需的时间
+			animateTo: angle + 1800,//1800=360*5，即5圈
+			callback: function(){
+				alert(text);
+			}
+		});
+	};
+});
+</script>
+</body>
+</html>

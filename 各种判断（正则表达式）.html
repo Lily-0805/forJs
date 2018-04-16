@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>正则</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+</script>
+<style type="text/css">
+input{ width: 200px; height: 30px; border: 1px solid #eee; background: #fff;}
+</style>
+</head>
+<body style=" background:#f90; ">
+    <p>姓名：<input type="text" id="name" /></p>
+    <p>手机号：<input type="text" id="mobile" /></p>
+    <p>电话号码：<input type="text" id="phone" /></p>
+    <p>邮箱：<input type="text" id="email" /></p>
+    <p>密码：<input type="text" id="password" /></p>
+    <button class="btn">提交</button>
+</body>
+</html>
+<script type="text/javascript">
+//判断是否为汉字
+$.ischinese=function(string){
+    return string.match(/^[\u4E00-\u9FA5]+$/);
+};
+
+//判断是否为手机
+$.ismobile=function(string){
+    return string.match(/^1[34578][0-9]{9}$/);
+};
+
+//判断是否为电话号码
+$.isphone=function(string){
+    return string.match(/^((0\d{2,3})-)(\d{7,8})(-(\d{3,4}))?$/);
+};
+
+//判断是否为邮箱
+$.isemail=function(string){
+    return string.match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/);
+};
+
+//判断是否为密码
+$.ispassword=function(string){
+    return string.match(/^[a-z0-9_-]{6,18}$/);
+};
+
+$(function(){
+    $(".btn").click(function(){
+        var name=$("#name").val();
+        var mobile=$("#mobile").val();
+        var phone=$("#phone").val();
+        var email=$("#email").val();
+        var password=$("#password").val();
+
+        if(name==null||name==""){
+            alert("请输入姓名");
+            return false;
+        }else if(!$.ischinese(name)){
+            alert("姓名只能为汉字");
+            return false;
+        };
+
+        if(mobile==null||mobile==""){
+            alert("请输入手机号");
+            return false;
+        }else if(!$.ismobile(mobile)){
+            alert("请输入正确的手机号！");
+            return false;
+        };
+
+        if(phone==null||phone==""){
+            alert("请输入电话号码");
+            return false;
+        }else if(!$.isphone(phone)){
+            alert("请输入正确的电话号码！");
+            return false;
+        };
+
+        if(email==null||email==""){
+            alert("请输入邮箱");
+            return false;
+        }else if(!$.isemail(email)){
+            alert("请输入正确的邮箱！");
+            return false;
+        };
+
+        if(password==null||password==""){
+            alert("请输入密码");
+            return false;
+        }else if(!$.ispassword(password)){
+            alert("密码为6~18位，包含数字、字母、下划线");
+            return false;
+        };
+
+
+    })
+})
+</script>

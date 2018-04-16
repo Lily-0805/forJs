@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>加减数量</title>
+<link rel="stylesheet" type="text/css" href="common.css" />    
+<style type="text/css">
+ul, ol { list-style: none; }
+*{font-size: 12px;}
+.fl{float: left; width: 100%;}
+.div{ float: left; width: 200px; height: 70px; padding-top: 30px; border: 1px solid #ddd; text-align: center;}
+input[type='text']{width:45px;height:25px;border:1px solid #ff9966;}
+.minus,.add,.minus_no,.add_no{ margin: 0 5px; display: inline-block; width: 20px; height: 20px; background: none; border: 1px solid #000; line-height: 20px; text-align: center; font-size: 16px; color: #000; vertical-align: middle; cursor: pointer;}
+.minus_no,.add_no{border-color: #eee; color: #eee; cursor:default; }
+.tonnage{display: inline-block; width: 50px; height: 30px; border: 1px solid #666; vertical-align: middle; color: #f00; line-height: 30px;}
+</style>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript">
+
+</script> 
+</head>      
+<body>
+<div class="fl">最小吨数<input type="text" class="ipt" value="12" />最大吨数<input type="text" class="ipt01" value="60" /></div>
+<div class="div">
+	<button class="minus">-</button>
+	<button class="minus_no">-</button>
+	<span class="tonnage"></span>
+	<button class="add">+</button>
+	<button class="add_no">+</button>
+</div>
+<div class="fl"><button class="tj">提交</button></div>
+</body>
+</html>
+<script type="text/javascript">
+function num(){
+	$(".add_no,.minus").hide();
+
+	var minTonnage = parseInt($(".ipt").val());
+	var maxTonnage = parseInt($(".ipt01").val());
+	$(".tonnage").html(minTonnage);
+	
+	//加
+	$(".add").click(function(){
+		var inputTonnage = parseInt($(".tonnage").html());
+		var n = inputTonnage+minTonnage;
+		$(".tonnage").html(n);
+		if(n>minTonnage){
+			$(".minus_no").hide();
+			$(".minus").show();
+		};
+		if(n==maxTonnage){
+			$(this).hide().next(".add_no").show();
+		};
+	});
+	//减
+	$(".minus").click(function(){
+		var inputTonnage = parseInt($(".tonnage").html());
+		var n = inputTonnage-minTonnage;
+		$(".tonnage").html(n);
+		if(n<maxTonnage){
+			$(".add_no").hide();
+			$(".add").show();
+		};
+		if(n==minTonnage){
+			$(this).hide().next(".minus_no").show();
+		};
+	});	
+	//提交
+	$(".tj").click(function(){
+		var inputTonnage = $(".tonnage").html();
+		alert("你提交的吨数是"+inputTonnage+"吨")
+	})
+}num();
+</script>
+

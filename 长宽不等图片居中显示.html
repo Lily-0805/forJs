@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>长宽不等图片居中显示</title>
+<meta name="description" content=''>
+<meta name="keywords" content=''>
+<link rel="stylesheet" type="text/css" href="http://www.zhaosuliao.com/resources/fore/css/common.css">
+<script type="text/javascript" src="http://www.zhaosuliao.com/resources/fore/plugin/jquery.js"></script>
+<style type="text/css">
+.img-div{margin: 200px; overflow: hidden; float: left; width: 200px; height: 200px; border: 2px solid #08d; border-radius: 5px; text-align: center; }
+
+
+</style>
+</head>
+<body>
+<div class="img-div">
+    <img src="http://www.zhaosuliao.com/resources/fore/image/index/floor5_img.jpg">
+</div>
+<div class="img-div">
+    <img src="http://www.zhaosuliao.com/resources/fore/image/info/miniPrograme/banner.jpg">
+</div>
+<div class="img-div">
+    <img src="http://www.zhaosuliao.com/resources/fore/image/info/new_app_down/mobile.png">
+</div>
+</body>
+<script type="text/javascript">
+$.fn.imageShow=function(){
+    var $this = $(this),
+        targetWidth = $this.width(),
+        targetHeight = $this.height();
+    var newWidth,newHeight;
+
+    if(targetWidth>targetHeight){        
+        $this.css("height","100%");
+        newWidth=$this.width();
+        newHeight=$this.height();
+        $this.css("margin-left",(newHeight-newWidth)/2);
+    }else if(targetWidth<targetHeight){
+        $this.css("width","100%");
+        newWidth=$this.width();
+        newHeight=$this.height();
+        $this.css("margin-top",(newWidth-newHeight)/2);
+    }else{
+        $this.css({"height":"100%","width":"100%"})
+    }
+};
+
+$("img").each(function(i){
+    $(this).imageShow();
+    console.log(this.naturalWidth)
+})
+
+
+</script>
